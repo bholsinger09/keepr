@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 
 namespace keepr.Repositories
@@ -12,12 +13,30 @@ namespace keepr.Repositories
       _db = db;
     }
 
+    internal object GetAll()
+    {
+      throw new NotImplementedException();
+    }
 
+    internal object GetById(int id)
+    {
+      throw new NotImplementedException();
+    }
 
+    internal object Create(Keep value)
+    {
+      throw new NotImplementedException();
+    }
 
+    internal object Update(Keep value)
+    {
+      throw new NotImplementedException();
+    }
 
-
-
+    internal object Delete(int v, int id)
+    {
+      throw new NotImplementedException();
+    }
 
 
   }

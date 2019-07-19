@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using keepr.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +17,11 @@ namespace keepr.Controllers
 
     // GET api/values
     [HttpGet]
-    public ActionResult<IEnumerable<>> Get()
+    public ActionResult<IEnumerable<Keep>> Get()
     {
       try
       {
-        return Ok();
+        return Ok(_repo.GetAll());
       }
       catch (Exception e)
       {
@@ -30,11 +31,11 @@ namespace keepr.Controllers
 
     // GET api/values/5
     [HttpGet("{id}")]
-    public ActionResult<Flower> Get(int id)
+    public ActionResult<Keep> Get(int id)
     {
       try
       {
-        return Ok();
+        return Ok(_repo.GetById(id));
       }
       catch (Exception e)
       {
@@ -44,11 +45,11 @@ namespace keepr.Controllers
 
     // POST api/values
     [HttpPost]
-    public ActionResult<> Post([FromBody] value)
+    public ActionResult<Keep> Post([FromBody] Keep value)
     {
       try
       {
-        return Ok();
+        return Ok(_repo.Create(value));
       }
       catch (Exception e)
       {
@@ -58,12 +59,12 @@ namespace keepr.Controllers
 
     // PUT api/values/5
     [HttpPut("{id}")]
-    public ActionResult<> Put(int id, [FromBody] value)
+    public ActionResult<Keep> Put(int id, [FromBody] Keep value)
     {
       try
       {
         value.Id = id;
-        return Ok();
+        return Ok(_repo.Update(value));
       }
       catch (Exception e)
       {
@@ -77,7 +78,7 @@ namespace keepr.Controllers
     {
       try
       {
-        return Ok();
+        return Ok(_repo.Delete(id));
       }
       catch (Exception e)
       {
