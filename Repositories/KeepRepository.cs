@@ -45,6 +45,11 @@ namespace keepr.Repositories
 
     }
 
+    public IEnumerable<Keep> GetKeepsByUser(string id)
+    {
+
+    }
+
     public Keep Create(Keep keep)
     {
       try
@@ -65,6 +70,8 @@ namespace keepr.Repositories
       }
 
     }
+
+
 
     public Keep Update(Keep keep)
     {
