@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace keepr.Controllers
 {
-  [Route("keeps")]
+  [Route("api/[controller]")]
   [ApiController]
   public class FlowersController : ControllerBase
   {
@@ -16,7 +16,7 @@ namespace keepr.Controllers
     }
 
     // GET api/values
-    [HttpGet]
+    [HttpGet("keeps")]
     public ActionResult<IEnumerable<Keep>> Get()
     {
       try
@@ -30,7 +30,7 @@ namespace keepr.Controllers
     }
 
     // GET api/values/5
-    [HttpGet("{id}")]
+    [HttpGet("keeps/{id}")]
     public ActionResult<Keep> Get(int id)
     {
       try
@@ -44,7 +44,7 @@ namespace keepr.Controllers
     }
 
     // POST api/values
-    [HttpPost]
+    [HttpPost("keeps")]
     public ActionResult<Keep> Post([FromBody] Keep value)
     {
       try
@@ -58,7 +58,7 @@ namespace keepr.Controllers
     }
 
     // PUT api/values/5
-    [HttpPut("{id}")]
+    [HttpPut("keeps/{id}")]
     public ActionResult<Keep> Put(int id, [FromBody] Keep value)
     {
       try
@@ -73,7 +73,7 @@ namespace keepr.Controllers
     }
 
     // DELETE api/values/5
-    [HttpDelete("{id}")]
+    [HttpDelete("keeps/{id}")]
     public ActionResult<String> Delete(int id)
     {
       try

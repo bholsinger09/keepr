@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
+using Dapper;
 
 namespace keepr.Repositories
 {
@@ -13,32 +15,96 @@ namespace keepr.Repositories
       _db = db;
     }
 
-    internal object GetAll()
+    public IEnumerable<Keep> GetAll()
     {
-      throw new NotImplementedException();
+      try
+      {
+        return _db.Query<Keep>("Select * FROM keeps;");
+      }
+      catch (Exception e)
+      {
+
+        throw e;
+      }
+
     }
 
-    internal object GetById(int id)
+    public Keep GetById(int id)
     {
-      throw new NotImplementedException();
+      try
+      {
+        Keep keep = _db.QueryFirstOrDefault<Keep>("SELECT * FROM keeps WHERE id = @id;", new { id });
+        if (keep is null) throw new Exception("No Job with that Id.");
+        return keep;
+      }
+      catch (Exception e)
+      {
+
+        throw e;
+      }
+
     }
 
-    internal object Create(Keep value)
+    public Keep Create(Keep keep)
     {
-      throw new NotImplementedException();
+      try
+      {
+        int id = _db.ExecuteScalar<int>(@"INSERT INTO keeps (name, description, userId, 
+                 img, isPrivate, views, shares, keeps)
+                VALUES (@Name, @Description, @UserId, @Image, @IsPrivate,@NumViews, @NumShares, @NumKeeps); 
+                SELECT LAST_INSERT_ID();", keep);
+        if (id < 1) throw new Exception("Unable to save job to db.");
+        keep.Id = id;
+        return keep;
+
+      }
+      catch (Exception e)
+      {
+
+        throw e;
+      }
+
     }
 
-    internal object Update(Keep value)
+    public Keep Update(Keep keep)
     {
-      throw new NotImplementedException();
+      try
+      {
+        int success = _db.Execute(@"UPDATE keeps
+               SET 
+               name = @Name, 
+               description = @Description,
+               isPrivate = @IsPrivate,
+               views = @NumViews,
+               shares= @NumShares,
+               keeps = @NumKeeps
+               WHERE id = @Id;", keep);
+        if (success != 1) throw new Exception("Something went wrong with the update.");
+        return keep;
+      }
+      catch (Exception e)
+      {
+
+        throw e;
+      }
+
     }
 
-    internal object Delete(int v, int id)
+    public string Delete(int id)
     {
-      throw new NotImplementedException();
+      try
+      {
+        int success = _db.Execute("DELETE FROM keeps WHERE id = @id;", new { id });
+        if (success != 1) throw new Exception("Something went wrong with deleting.");
+        return "Job deleted!";
+      }
+      catch (Exception e)
+      {
+
+        throw e;
+      }
+
     }
-
-
   }
 
 
