@@ -7,16 +7,16 @@ namespace keepr.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class FlowersController : ControllerBase
+  public class keepsController : ControllerBase
   {
     private readonly KeepRepository _repo;
-    public FlowersController(KeepRepository repo)
+    public keepsController(KeepRepository repo)
     {
       _repo = repo;
     }
 
     // GET api/values
-    [HttpGet("keeps")]
+    [HttpGet]
     public ActionResult<IEnumerable<Keep>> Get()
     {
       try
@@ -30,7 +30,7 @@ namespace keepr.Controllers
     }
 
     // GET api/values/5
-    [HttpGet("keeps/{id}")]
+    [HttpGet("{id}")]
     public ActionResult<Keep> Get(int id)
     {
       try
@@ -44,7 +44,7 @@ namespace keepr.Controllers
     }
 
     // POST api/values
-    [HttpPost("keeps")]
+    [HttpPost]
     public ActionResult<Keep> Post([FromBody] Keep value)
     {
       try
@@ -58,7 +58,7 @@ namespace keepr.Controllers
     }
 
     // PUT api/values/5
-    [HttpPut("keeps/{id}")]
+    [HttpPut("{id}")]
     public ActionResult<Keep> Put(int id, [FromBody] Keep value)
     {
       try
@@ -73,7 +73,7 @@ namespace keepr.Controllers
     }
 
     // DELETE api/values/5
-    [HttpDelete("keeps/{id}")]
+    [HttpDelete("{id}")]
     public ActionResult<String> Delete(int id)
     {
       try
