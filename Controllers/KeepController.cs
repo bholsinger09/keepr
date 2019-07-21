@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using keepr.Models;
 using keepr.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,11 +46,11 @@ namespace keepr.Controllers
 
     //GET api/keeps/users
     [HttpGet("user")]
-    public ActionResult<Keep> GetKeepByUser(int id)
+    public ActionResult<IEnumerable<User>> GetKeepByUser(int uId)
     {
       try
       {
-        return Ok(_repo.GetKeepsByUser(id));
+        return Ok(_repo.GetKeepsByUser(uId));
       }
       catch (Exception e)
       {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Dapper;
+using keepr.Models;
 
 namespace keepr.Repositories
 {
@@ -45,9 +46,20 @@ namespace keepr.Repositories
 
     }
 
-    public IEnumerable<Keep> GetKeepsByUser(string id)
+    public IEnumerable<Keep> GetKeepsByUser(int uId)
     {
+      try
+      {
+        string query = @"SELECT * FROM vaultkeeps vk 
+                INNER JOIN keeps k ON k.id = vk.keepId
+                WHERE userId = @uId;";
+        return _db.Query<Keep>(query, new { uId });
+      }
+      catch (Exception e)
+      {
 
+        throw e;
+      }
     }
 
     public Keep Create(Keep keep)
