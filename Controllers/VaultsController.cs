@@ -12,17 +12,17 @@ namespace keepr.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class keepsController : ControllerBase
+  public class vaultController : ControllerBase
   {
     private readonly KeepRepository _repo;
-    public keepsController(KeepRepository repo)
+    public vaultController(VaultRepository repo)
     {
       _repo = repo;
     }
 
     // GET api/keeps
     [HttpGet]
-    public ActionResult<IEnumerable<Keep>> Get()
+    public ActionResult<IEnumerable<Vault>> Get()
     {
       try
       {
@@ -36,7 +36,7 @@ namespace keepr.Controllers
 
     // GET api/keeps/id
     [HttpGet("{id}")]
-    public ActionResult<Keep> Get(int id)
+    public ActionResult<Vault> Get(int id)
     {
       try
       {
@@ -51,7 +51,7 @@ namespace keepr.Controllers
     [Authorize]
     //GET api/keeps/users
     [HttpGet("user")]
-    public ActionResult<IEnumerable<User>> GetKeepByUser()
+    public ActionResult<IEnumerable<Vault>> GetKeepByUser()
     {
       try
       {
@@ -67,7 +67,7 @@ namespace keepr.Controllers
     [Authorize]
     // POST api/keeps/value
     [HttpPost]
-    public async Task<ActionResult<Keep>> Post([FromBody] Keep value)
+    public async Task<ActionResult<Vault>> Post([FromBody] Vault value)
     {
       try
       {
@@ -90,7 +90,7 @@ namespace keepr.Controllers
     [Authorize]
     // PUT api/keeps/values/id
     [HttpPut("{id}")]
-    public ActionResult<Keep> Put(int id, [FromBody] Keep value)
+    public ActionResult<Vault> Put(int id, [FromBody] Keep value)
     {
       try
       {

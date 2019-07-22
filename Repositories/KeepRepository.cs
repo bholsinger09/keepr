@@ -46,12 +46,12 @@ namespace keepr.Repositories
 
     }
 
-    public IEnumerable<Keep> GetKeepsByUser(int uId)
+    public IEnumerable<Keep> GetKeepsByUser(string uId)
     {
       try
       {
-        string query = @"SELECT * FROM vaultkeeps vk 
-                INNER JOIN keeps k ON k.id = vk.keepId
+        string query = @"SELECT * FROM vaultkeeps  
+                INNER JOIN keeps  ON keep.id = vaultKeeps.keepId
                 WHERE userId = @uId;";
         return _db.Query<Keep>(query, new { uId });
       }
@@ -62,7 +62,7 @@ namespace keepr.Repositories
       }
     }
 
-    public Keep Create(Keep keep)
+    public Keep Create(Keep keep, string userId)
     {
       try
       {
