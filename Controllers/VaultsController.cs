@@ -12,15 +12,15 @@ namespace keepr.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class vaultController : ControllerBase
+  public class vaultsController : ControllerBase
   {
-    private readonly KeepRepository _repo;
-    public vaultController(VaultRepository repo)
+    private readonly VaultRepository _repo;
+    public vaultsController(VaultRepository repo)
     {
       _repo = repo;
     }
 
-    // GET api/keeps
+    // GET api/vaults
     [HttpGet]
     public ActionResult<IEnumerable<Vault>> Get()
     {
@@ -30,11 +30,12 @@ namespace keepr.Controllers
       }
       catch (Exception e)
       {
+        System.Diagnostics.Debug.WriteLine("hits get controller");
         return BadRequest(e);
       }
     }
 
-    // GET api/keeps/id
+    // GET api/vaults/id
     [HttpGet("{id}")]
     public ActionResult<Vault> Get(int id)
     {
@@ -44,28 +45,29 @@ namespace keepr.Controllers
       }
       catch (Exception e)
       {
+        System.Diagnostics.Debug.WriteLine("hits get by id controller");
         return BadRequest(e);
       }
     }
 
-    [Authorize]
-    //GET api/keeps/users
-    [HttpGet("user")]
-    public ActionResult<IEnumerable<Vault>> GetKeepByUser()
-    {
-      try
-      {
-        var uId = HttpContext.User.FindFirstValue("Id");
-        return Ok(_repo.GetKeepsByUser(uId));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e);
-      }
-    }
+    // [Authorize]
+    // //GET api/vaults/users
+    // [HttpGet("user")]
+    // public ActionResult<IEnumerable<Vault>> GetVaultByUser()
+    // {
+    //   try
+    //   {
+    //     var uId = HttpContext.User.FindFirstValue("Id");
+    //     return Ok(_repo.GetVaultsByUser(uId));
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e);
+    //   }
+    // }
 
     [Authorize]
-    // POST api/keeps/value
+    // POST api/vaults/value
     [HttpPost]
     public async Task<ActionResult<Vault>> Post([FromBody] Vault value)
     {
@@ -82,15 +84,16 @@ namespace keepr.Controllers
       }
       catch (Exception e)
       {
+        System.Diagnostics.Debug.WriteLine("hits hits post");
         return BadRequest(e);
       }
     }
 
 
     [Authorize]
-    // PUT api/keeps/values/id
+    // PUT api/vaults/values/id
     [HttpPut("{id}")]
-    public ActionResult<Vault> Put(int id, [FromBody] Keep value)
+    public ActionResult<Vault> Put(int id, [FromBody] Vault value)
     {
       try
       {
@@ -99,12 +102,13 @@ namespace keepr.Controllers
       }
       catch (Exception e)
       {
+        System.Diagnostics.Debug.WriteLine("hits put");
         return BadRequest(e);
       }
     }
 
     [Authorize]
-    // DELETE api/keeps/values/id
+    // DELETE api/vaults/values/id
     [HttpDelete("{id}")]
     public ActionResult<String> Delete(int id)
     {
@@ -114,6 +118,7 @@ namespace keepr.Controllers
       }
       catch (Exception e)
       {
+        System.Diagnostics.Debug.WriteLine("hits delete controller");
         return BadRequest(e);
       }
     }

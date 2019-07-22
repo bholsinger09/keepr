@@ -35,7 +35,7 @@ namespace keepr.Repositories
       try
       {
         Keep keep = _db.QueryFirstOrDefault<Keep>("SELECT * FROM keeps WHERE id = @id;", new { id });
-        if (keep is null) throw new Exception("No Job with that Id.");
+        if (keep is null) throw new Exception("No keep with that Id.");
         return keep;
       }
       catch (Exception e)
@@ -50,9 +50,8 @@ namespace keepr.Repositories
     {
       try
       {
-        string query = @"SELECT * FROM vaultkeeps  
-                INNER JOIN keeps  ON keep.id = vaultKeeps.keepId
-                WHERE userId = @uId;";
+        string query = @"SELECT * FROM keeps  
+                       WHERE userId = @uId;";
         return _db.Query<Keep>(query, new { uId });
       }
       catch (Exception e)
@@ -68,9 +67,9 @@ namespace keepr.Repositories
       {
         int id = _db.ExecuteScalar<int>(@"INSERT INTO keeps (name, description, userId, 
                  img, isPrivate, views, shares, keeps)
-                VALUES (@Name, @Description, @UserId, @Image, @IsPrivate,@NumViews, @NumShares, @NumKeeps); 
+                VALUES (@Name, @Description, @UserId, @Img, @IsPrivate,@Views, @Shares, @Keeps); 
                 SELECT LAST_INSERT_ID();", keep);
-        if (id < 1) throw new Exception("Unable to save job to db.");
+        if (id < 1) throw new Exception("Unable to save keep to db.");
         keep.Id = id;
         return keep;
 
@@ -93,10 +92,11 @@ namespace keepr.Repositories
                SET 
                name = @Name, 
                description = @Description,
+               img = @Img,
                isPrivate = @IsPrivate,
-               views = @NumViews,
-               shares= @NumShares,
-               keeps = @NumKeeps
+               views = @Views,
+               shares= @Shares,
+               keeps = @Keeps
                WHERE id = @Id;", keep);
         if (success != 1) throw new Exception("Something went wrong with the update.");
         return keep;
@@ -115,7 +115,7 @@ namespace keepr.Repositories
       {
         int success = _db.Execute("DELETE FROM keeps WHERE id = @id;", new { id });
         if (success != 1) throw new Exception("Something went wrong with deleting.");
-        return "Job deleted!";
+        return "Keep deleted!";
       }
       catch (Exception e)
       {

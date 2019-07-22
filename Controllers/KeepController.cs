@@ -51,21 +51,23 @@ namespace keepr.Controllers
     [Authorize]
     //GET api/keeps/users
     [HttpGet("user")]
-    public ActionResult<IEnumerable<User>> GetKeepByUser()
+    public ActionResult<IEnumerable<Keep>> GetKeepByUser()
     {
       try
       {
         var uId = HttpContext.User.FindFirstValue("Id");
         return Ok(_repo.GetKeepsByUser(uId));
+        // return (uId);
       }
       catch (Exception e)
       {
-        return BadRequest(e);
+        return BadRequest(e.Message);
+
       }
     }
 
     [Authorize]
-    // POST api/keeps/value
+    // POST api/keeps
     [HttpPost]
     public async Task<ActionResult<Keep>> Post([FromBody] Keep value)
     {
