@@ -61,6 +61,18 @@ namespace keepr.Repositories
       }
     }
 
+
+    //postman
+    // {
+    // "Img":"https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/2248/s300/cw-logo-square-black-outline.jpg",
+    // "Description": "first keep",
+    // "UserId":"a9751b3e-9926-474c-b36d-ffbbacabcaae",
+    // "Name": "keep test one",
+    // "IsPrivate": true
+
+    // }
+
+
     public Keep Create(Keep keep, string userId)
     {
       try

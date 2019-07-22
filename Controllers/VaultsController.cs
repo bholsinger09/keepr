@@ -21,6 +21,7 @@ namespace keepr.Controllers
     }
 
     // GET api/vaults
+
     [HttpGet]
     public ActionResult<IEnumerable<Vault>> Get()
     {
@@ -30,8 +31,8 @@ namespace keepr.Controllers
       }
       catch (Exception e)
       {
-        System.Diagnostics.Debug.WriteLine("hits get controller");
-        return BadRequest(e);
+
+        return BadRequest(e.Message);
       }
     }
 
@@ -85,7 +86,7 @@ namespace keepr.Controllers
       catch (Exception e)
       {
         System.Diagnostics.Debug.WriteLine("hits hits post");
-        return BadRequest(e);
+        return BadRequest(e.Message);
       }
     }
 

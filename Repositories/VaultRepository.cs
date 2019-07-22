@@ -19,7 +19,7 @@ namespace keepr.Repositories
     {
       try
       {
-        System.Diagnostics.Debug.WriteLine("hits getall");
+
         return _db.Query<Vault>("Select * FROM vaults;");
       }
       catch (Exception e)
@@ -34,7 +34,7 @@ namespace keepr.Repositories
     {
       try
       {
-        System.Diagnostics.Debug.WriteLine("hits getbyid");
+
         Vault vault = _db.QueryFirstOrDefault<Vault>("SELECT * FROM vaults WHERE id = @id;", new { id });
         if (vault is null) throw new Exception("No Job with that Id.");
         return vault;
@@ -51,7 +51,7 @@ namespace keepr.Repositories
     {
       try
       {
-        System.Diagnostics.Debug.WriteLine("hits delete");
+
         int success = _db.Execute("DELETE FROM vaults WHERE id = @id;", new { id });
         if (success != 1) throw new Exception("Something went wrong with deleting.");
         return "vault deleted!";
@@ -69,7 +69,7 @@ namespace keepr.Repositories
 
       try
       {
-        System.Diagnostics.Debug.WriteLine("hits update");
+
         int success = _db.Execute(@"UPDATE vaults
                SET 
                name = @Name,
@@ -91,7 +91,7 @@ namespace keepr.Repositories
     {
       try
       {
-        System.Diagnostics.Debug.WriteLine("hits create");
+
         int id = _db.ExecuteScalar<int>(@"INSERT INTO vaults (name, description, userId)
                 VALUES (@Name, @Description, @UserId); 
                 SELECT LAST_INSERT_ID();", vault);
