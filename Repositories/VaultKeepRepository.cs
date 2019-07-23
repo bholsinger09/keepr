@@ -56,8 +56,9 @@ namespace keepr.Repositories
             VALUES (@VaultId, @KeepId, @UserId);
             SELECT LAST_INSERT_ID();
             ";
-        string id = _db.ExecuteScalar<string>(query, vk);
-        vk.UserId = id;
+        vk.UserId = userId;
+        int id = _db.ExecuteScalar<int>(query, vk);
+        vk.Id = id;
         return vk;
 
 
@@ -87,25 +88,25 @@ namespace keepr.Repositories
     // --         REFERENCES keeps(id)
     // --         ON DELETE CASCADE
 
-    // public VaultKeep Delete(string UserId)
-    // {
-    //   try
-    //   {
+    public string Delete(int id, string UserId)
+    {
+      try
+      {
 
-    //         string query = "DELETE FROM vaultkeeps WHERE userId = @UserId;";
-    //         int changedRows = _db.Execute(query, new { UserId });
-    //         if (changedRows < 1) throw new Exception("Invalid Id");
-    //         return "Successfully Deleted Relation";
+        string query = "DELETE FROM vaultkeeps WHERE userId = @UserId;";
+        int changedRows = _db.Execute(query, new { UserId });
+        if (changedRows < 1) throw new Exception("Invalid Id");
+        return "Successfully Deleted Relation";
 
 
-    //   }
-    //   catch (Exception e)
-    //   {
+      }
+      catch (Exception e)
+      {
 
-    //       throw e;
-    //   }
+        throw e;
+      }
 
-    // }
+    }
 
     #endregion
   }

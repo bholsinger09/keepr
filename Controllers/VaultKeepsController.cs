@@ -22,26 +22,26 @@ namespace keepr.Controllers
 
 
 
-    // GET api/keeps/id
+    // GET api/vaultkeeps/id
     [Authorize]
     [HttpGet("{id}")]
-    public ActionResult<VaultKeep> Get(int vid)
+    public ActionResult<VaultKeep> Get(int id)
     {
       try
       {
         var Userid = HttpContext.User.FindFirstValue("Id");
-        return Ok(_repo.GetById(Userid, vid));
+        return Ok(_repo.GetById(Userid, id));
       }
       catch (Exception e)
       {
-        return BadRequest(e);
+        return BadRequest(e.Message);
       }
     }
 
 
 
     [Authorize]
-    // POST api/keeps
+    // POST api/vaultkeeps
     [HttpPost]
     public async Task<ActionResult<VaultKeep>> Post([FromBody] VaultKeep value)
     {
@@ -63,28 +63,28 @@ namespace keepr.Controllers
     }
 
 
-    //[Authorize]
+    [Authorize]
     //this is the delete method
-    // PUT api/keeps/values/id
-    //[HttpPut("{id}")]
-    // public async Task<ActionResult<VaultKeep>> Put([FromBody] VaultKeep value)
-    // {
-    //   try
-    //   {
-    //     var Userid = HttpContext.User.FindFirstValue("Id");
-    //     var user = _repo.Delete(value, Userid);
-    //     if (user == null)
-    //     {
-    //       await HttpContext.SignOutAsync();
-    //       throw new Exception("User not logged In");
-    //     }
-    //     return Ok(user);
-    //   }
-    //   catch (Exception e)
-    //   {
-    //     return BadRequest(e);
-    //   }
-    //}
+    //PUT api/vaultkeeps/values/id
+    [HttpPut("{id}")]
+    public async Task<ActionResult<string>> Put([FromBody] int id)
+    {
+      try
+      {
+        var Userid = HttpContext.User.FindFirstValue("Id");
+        var user = _repo.Delete(id, Userid);
+        if (user == null)
+        {
+          await HttpContext.SignOutAsync();
+          throw new Exception("User not logged In");
+        }
+        return Ok(user);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
 
   }
 }
