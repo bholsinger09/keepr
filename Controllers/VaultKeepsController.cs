@@ -22,15 +22,18 @@ namespace keepr.Controllers
 
 
 
-    // GET api/vaultkeeps/id
+    // GET api/vaultkeeps/vaultid
     [Authorize]
     [HttpGet("{id}")]
-    public ActionResult<VaultKeep> Get(int id)
+    public ActionResult<VaultKeep> Get(VaultKeep vk, int id)
     {
       try
       {
         var Userid = HttpContext.User.FindFirstValue("Id");
-        return Ok(_repo.GetById(Userid, id));
+        vk.UserId = Userid;
+        vk.VaultId = id;
+
+        return Ok(_repo.GetById(vk));
       }
       catch (Exception e)
       {

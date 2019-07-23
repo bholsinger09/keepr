@@ -16,16 +16,18 @@ namespace keepr.Repositories
     }
 
     #region getbyid
-    public IEnumerable<Keep> GetById(string userId, int id)
+    public IEnumerable<Keep> GetById(VaultKeep vk)
     {
       try
       {
 
         string query = @"SELECT * FROM vaultkeeps vk
                 INNER JOIN keeps k ON k.id = vk.keepId
-                WHERE (vaultId = vaultId and vk.userId = @userId) 
+                WHERE (vaultId = @vaultId and vk.userId = @userId) 
                 ;";
-        return _db.Query<Keep>(query, new { id });
+
+
+        return _db.Query<Keep>(query, vk);
 
 
 
