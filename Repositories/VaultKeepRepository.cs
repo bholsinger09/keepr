@@ -90,16 +90,14 @@ namespace keepr.Repositories
     // --         REFERENCES keeps(id)
     // --         ON DELETE CASCADE
 
-    public string Delete(VaultKeep vk, string userId)
+    public string Delete(VaultKeep vk)
     {
       try
       {
 
         string query = @"DELETE FROM vaultkeeps vk 
         WHERE
-        (vaultId = @VaultId and vk.userId = @UserId and keepId = @KeepId);";
-        //passing query full object vaultkeep(data) and userid
-        vk.UserId = userId;
+        (vaultId = @VaultId and userId = @UserId and keepId = @KeepId);";
         int changedRows = _db.Execute(query, new { vk });
         //Excute returns a int of number of rows affected
         if (changedRows < 1) throw new Exception("Invalid Id");

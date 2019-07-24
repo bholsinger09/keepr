@@ -75,13 +75,14 @@ namespace keepr.Controllers
       try
       {
         var Userid = HttpContext.User.FindFirstValue("Id");
-        var user = _repo.Delete(vk, Userid);
+        vk.UserId = Userid;
+        var user = _repo.Delete(vk);
 
         return Ok(user);
       }
       catch (Exception e)
       {
-        return BadRequest(e);
+        return BadRequest(e.Message);
       }
     }
 

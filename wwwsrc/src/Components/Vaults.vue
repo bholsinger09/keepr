@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1> test vaults component </h1>
-
-    <keep></keep>
-
+    <h1> Here are the Keeps for you Vault</h1>
+    <div class="keep-Container" <keep>
+      </keep>
+    </div>
 
   </div>
 
@@ -14,7 +14,13 @@
   export default {
     name: 'Vault',
     data() {
-      return {}
+      return {
+        newVault: {
+          name: '',
+          description: ''
+          //userId: this.userId
+        }
+      }
     },
     computer: {
 
