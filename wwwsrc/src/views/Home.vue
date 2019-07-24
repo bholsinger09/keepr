@@ -12,6 +12,13 @@
           <input type="text" placeholder="description" v-model="newVault.description">
           <button type="submit">Create Your Vault</button>
         </form>
+        <div class="devider">
+        </div>
+        <div class="vaults-content" v-for="vault in vaults" :key="vault._id">
+          <p>{vault.name}</p>
+          <p>{vault.description}</p>
+        </div>
+
         <vault></vault>
       </div>
     </main>
@@ -37,7 +44,7 @@
       user() {
         return this.$store.state.user;
       },
-      vault() {
+      vaults() {
         return this.$store.state.vault;
       }
     },
