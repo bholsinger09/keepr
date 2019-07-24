@@ -16,7 +16,7 @@ namespace keepr.Repositories
     }
 
     #region getbyid
-    public IEnumerable<Keep> GetById(VaultKeep vk)
+    public IEnumerable<Keep> GetById(int vaultId, string userId)
     {
       try
       {
@@ -27,7 +27,7 @@ namespace keepr.Repositories
                 ;";
 
 
-        return _db.Query<Keep>(query, vk);
+        return _db.Query<Keep>(query, new { vaultId, userId });
 
 
 
