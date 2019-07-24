@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1> Here are the Keeps for you Vault</h1>
-    <div class="keep-Container" <keep>
-      </keep>
-    </div>
+    <div class="keep-Container" <keep></div>
+    </keep>
+  </div>
 
   </div>
 

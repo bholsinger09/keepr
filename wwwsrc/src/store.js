@@ -16,7 +16,9 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: {},
+    vault: {},
+    keep: {},
   },
   mutations: {
     setUser(state, user) {
@@ -28,6 +30,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    //#region auth
     async register({ commit, dispatch }, creds) {
       try {
         let user = await AuthService.Register(creds)
@@ -55,6 +58,24 @@ export default new Vuex.Store({
       } catch (e) {
         console.warn(e.message)
       }
-    }
+    },
+    //#endregion
+
+
+
+    addVault({ commit, dispatch }, vaultData) {
+      api.post('vaults', vaultData)
+      api.get('vaults')
+        .then(res => {
+          dispatch('getVaults')
+          commit('setVaults', res.data)
+          console.log(res);
+        })
+    },
+
+
+
+
+
   }
 })

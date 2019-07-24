@@ -21,7 +21,7 @@ namespace keepr.Controllers
     }
 
     // GET api/vaults
-
+    [Authorize]
     [HttpGet]
     public ActionResult<IEnumerable<Vault>> Get()
     {

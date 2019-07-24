@@ -7,8 +7,13 @@
     </header>
     <main>
       <div class="vaults">
+        <form @submit.prevent="addVault">
+          <input type="text" placeholder="name" v-model="newVault.name" required>
+          <input type="text" placeholder="description" v-model="newVault.description">
+          <button type="submit">Create Your Vault</button>
+        </form>
         <vault></vault>
-
+      </div>
     </main>
 
   </div>
@@ -21,11 +26,19 @@
   export default {
     name: "home",
     data() {
-      return {}
+      return {
+        newVault: {
+          name: "",
+          description: ""
+        }
+      }
     },
     computed: {
       user() {
         return this.$store.state.user;
+      },
+      vault() {
+        return this.$store.state.vault;
       }
     },
 
