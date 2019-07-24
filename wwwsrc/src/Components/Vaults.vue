@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1> test keep component </h1>
+    <h1> test vaults component </h1>
 
-
+    <keep></keep>
 
 
   </div>
@@ -10,8 +10,9 @@
 </template>
 
 <script>
+  import Keep from '@/Components/Keeps.vue'
   export default {
-    name: 'Keep',
+    name: 'Vault',
     data() {
       return {}
     },
@@ -19,6 +20,10 @@
 
     },
     methods: {
+
+    },
+    components: {
+      Keep
 
     }
 

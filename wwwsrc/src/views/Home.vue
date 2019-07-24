@@ -7,7 +7,7 @@
     </header>
     <main>
 
-      <keep></keep>
+      <vault></vault>
 
     </main>
 
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+  import Vault from '@/Components/Vaults.vue'
   export default {
     name: "home",
     computed: {
@@ -31,7 +32,10 @@
       }
     },
     components: {
-      Keep
+      Vault
     }
   };
 </script>
+
+<style>
+</style>

@@ -99,7 +99,8 @@ namespace keepr.Repositories
         WHERE
         (vaultId = @VaultId and vk.userId = @UserId and keepId = @KeepId);";
         //passing query full object vaultkeep(data) and userid
-        int changedRows = _db.Execute(query, new { vk, userId });
+        vk.UserId = userId;
+        int changedRows = _db.Execute(query, new { vk });
         //Excute returns a int of number of rows affected
         if (changedRows < 1) throw new Exception("Invalid Id");
         return "Successfully Deleted Relation";
