@@ -95,10 +95,10 @@ namespace keepr.Repositories
       try
       {
 
-        string query = @"DELETE FROM vaultkeeps vk 
+        string query = @"DELETE FROM vaultkeeps
         WHERE
-        (vaultId = @VaultId and userId = @UserId and keepId = @KeepId);";
-        int changedRows = _db.Execute(query, new { vk });
+        (  keepId = @KeepId and vaultId = @VaultId and userId = @UserId);";
+        int changedRows = _db.Execute(query, vk);
         //Excute returns a int of number of rows affected
         if (changedRows < 1) throw new Exception("Invalid Id");
         return "Successfully Deleted Relation";

@@ -70,15 +70,13 @@ namespace keepr.Controllers
     //this is the delete method
     //PUT api/vaultkeeps/
     [HttpPut]
-    public ActionResult<VaultKeep> Put([FromBody] VaultKeep vk)
+    public ActionResult<string> Put([FromBody] VaultKeep vk)
     {
       try
       {
         var Userid = HttpContext.User.FindFirstValue("Id");
         vk.UserId = Userid;
-        var user = _repo.Delete(vk);
-
-        return Ok(user);
+        return Ok(_repo.Delete(vk));
       }
       catch (Exception e)
       {
