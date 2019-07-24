@@ -90,13 +90,14 @@ namespace keepr.Repositories
     // --         REFERENCES keeps(id)
     // --         ON DELETE CASCADE
 
-    public string Delete(int id, string UserId)
+    public string Delete(int vaultId, int keepId, string userId)
     {
       try
       {
 
-        string query = "DELETE FROM vaultkeeps WHERE userId = @UserId;";
-        int changedRows = _db.Execute(query, new { UserId });
+        string query = @"DELETE FROM vaultkeeps vk 
+        vaultId = @vaultId and vk.userId = @userId and keepId = @keepId";
+        int changedRows = _db.Execute(query, new { vaultId, keepId, userId });
         if (changedRows < 1) throw new Exception("Invalid Id");
         return "Successfully Deleted Relation";
 

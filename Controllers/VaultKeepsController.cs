@@ -68,19 +68,17 @@ namespace keepr.Controllers
 
     [Authorize]
     //this is the delete method
-    //PUT api/vaultkeeps/values/id
-    [HttpPut("{id}")]
-    public async Task<ActionResult<string>> Put([FromBody] int id)
+    //PUT api/vaultkeeps/
+    [HttpPut]
+    public ActionResult<VaultKeep> Put([FromBody] VaultKeep vk)
     {
       try
       {
         var Userid = HttpContext.User.FindFirstValue("Id");
-        var user = _repo.Delete(id, Userid);
-        if (user == null)
-        {
-          await HttpContext.SignOutAsync();
-          throw new Exception("User not logged In");
-        }
+        int keepId = vk.KeepId;
+        int vaultId = vk.VaultId;
+        var user = _repo.Delete(vaultId, keepId, Userid);
+
         return Ok(user);
       }
       catch (Exception e)
