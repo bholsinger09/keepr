@@ -75,9 +75,7 @@ namespace keepr.Controllers
       try
       {
         var Userid = HttpContext.User.FindFirstValue("Id");
-        int keepId = vk.KeepId;
-        int vaultId = vk.VaultId;
-        var user = _repo.Delete(vaultId, keepId, Userid);
+        var user = _repo.Delete(vk, Userid);
 
         return Ok(user);
       }

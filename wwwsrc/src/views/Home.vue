@@ -6,6 +6,7 @@
       <router-link v-else :to="{name: 'login'}">Login</router-link>
     </header>
     <main>
+
       <keep></keep>
 
     </main>
@@ -28,6 +29,9 @@
       logout() {
         this.$store.dispatch("logout");
       }
+    },
+    components: {
+      Keep
     }
   };
 </script>
