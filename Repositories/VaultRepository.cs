@@ -15,12 +15,12 @@ namespace keepr.Repositories
       _db = db;
     }
 
-    public IEnumerable<Vault> GetAll()
+    public IEnumerable<Vault> GetAll(Vault payload)
     {
       try
       {
 
-        return _db.Query<Vault>("Select * FROM vaults Where userId = @UserId;");
+        return _db.Query<Vault>("Select * FROM vaults Where userId = @UserId;", new { payload });
       }
       catch (Exception e)
       {

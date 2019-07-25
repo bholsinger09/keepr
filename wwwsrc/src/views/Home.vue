@@ -42,6 +42,11 @@
         }
       }
     },
+    created() {
+      if (!this.$store.state.user.id) {
+        this.$router.push({ name: "login" })
+      }
+    },
     computed: {
       user() {
         return this.$store.state.user;

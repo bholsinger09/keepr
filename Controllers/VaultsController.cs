@@ -23,12 +23,12 @@ namespace keepr.Controllers
     // GET api/vaults
     [Authorize]
     [HttpGet]
-    public ActionResult<IEnumerable<Vault>> Get()
+    public ActionResult<IEnumerable<Vault>> Get(Vault payload)
     {
       try
       {
 
-        return Ok(_repo.GetAll());
+        return Ok(_repo.GetAll(payload));
       }
       catch (Exception e)
       {

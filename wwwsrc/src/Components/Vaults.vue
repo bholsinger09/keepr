@@ -22,7 +22,8 @@
         }
       }
     },
-    computer: {
+
+    computed: {
 
     },
     methods: {
