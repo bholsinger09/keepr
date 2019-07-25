@@ -121,11 +121,11 @@ namespace keepr.Repositories
 
     }
 
-    public string Delete(int id)
+    public string Delete(int id, string userId)
     {
       try
       {
-        int success = _db.Execute("DELETE FROM keeps WHERE id = @id;", new { id });
+        int success = _db.Execute("DELETE FROM keeps WHERE id = @Id and userId = @UserId;", new { id, userId });
         if (success != 1) throw new Exception("Something went wrong with deleting.");
         return "Keep deleted!";
       }

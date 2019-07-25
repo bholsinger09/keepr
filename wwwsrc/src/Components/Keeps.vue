@@ -16,6 +16,7 @@
           <p>{{Keep.name}}</p>
           <p>{{Keep.description}}</p>
           <!-- <img src="{{keep.image}}" alt="keep" height="10vh" width="10vw"> -->
+          <button @click="deleteKeep(Keep.id)">delete keep</button>
         </div>
       </div>
 
@@ -37,6 +38,10 @@
         }
       }
     },
+    mounted() {
+      this.$store.dispatch("getKeeps");
+    },
+
     computed: {
       Keeps() {
         return this.$store.state.keep;
@@ -48,6 +53,10 @@
         this.$store.dispatch("addKeep", this.newKeep);
         this.newKeep = { name: "", description: "" }
       },
+      deleteKeep(keepId) {
+
+        this.$store.dispatch("deleteKeep", keepId);
+      }
 
     }
 
