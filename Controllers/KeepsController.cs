@@ -74,7 +74,8 @@ namespace keepr.Controllers
       try
       {
         var Userid = HttpContext.User.FindFirstValue("Id");
-        var user = _repo.Create(value, Userid);
+        value.UserId = Userid;
+        var user = _repo.Create(value);
         if (user == null)
         {
           await HttpContext.SignOutAsync();

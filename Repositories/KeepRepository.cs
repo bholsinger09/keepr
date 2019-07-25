@@ -73,7 +73,7 @@ namespace keepr.Repositories
     // }
 
 
-    public Keep Create(Keep keep, string userId)
+    public Keep Create(Keep keep)
     {
       try
       {
@@ -82,7 +82,7 @@ namespace keepr.Repositories
                 VALUES (@Name, @Description, @UserId, @Img, @IsPrivate,@Views, @Shares, @Keeps); 
                 SELECT LAST_INSERT_ID();", keep);
         if (id < 1) throw new Exception("Unable to save keep to db.");
-        keep.Id = id;
+
         return keep;
 
       }

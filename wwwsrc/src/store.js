@@ -94,7 +94,7 @@ export default new Vuex.Store({
     },
 
     addKeep({ commit, dispatch }, keepData) {
-      api.post('vaults', keepData)
+      api.post('keeps', keepData)
         .then(res => {
           dispatch('getKeeps')
         })
