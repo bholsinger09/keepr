@@ -47,14 +47,14 @@ namespace keepr.Repositories
 
     }
 
-    public object Delete(Vault vault)
+    public object Delete(int id, string userId)
     {
       try
       {
         string query = @"DELETE FROM 
         vaults WHERE
          id = @Id and userId = @UserId;";
-        int success = _db.Execute(query, vault);
+        int success = _db.Execute(query, new { id, userId });
         if (success != 1) throw new Exception("Something went wrong with deleting.");
         return "vault deleted!";
       }

@@ -120,14 +120,13 @@ namespace keepr.Controllers
     [Authorize]
     // DELETE api/vaults/values/id
     [HttpDelete("{id}")]
-    public ActionResult<Vault> Delete(Vault vault, int id)
+    public ActionResult<string> Delete(int id)
     {
       try
       {
         var Userid = HttpContext.User.FindFirstValue("Id");
-        vault.UserId = Userid;
-        vault.Id = id;
-        return Ok(_repo.Delete(vault));
+
+        return Ok(_repo.Delete(id, Userid));
       }
       catch (Exception e)
       {

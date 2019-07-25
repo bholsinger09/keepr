@@ -16,13 +16,18 @@
         </div>
         <div class="vaults-content" v-for="vault in vaults" :key="vault._id">
           <div class="vault">
+            <h2>This is your Vault</h2>
             <p>name: {{vault.name}}</p>
             <p>description: {{vault.description}}</p>
             <button @click="deleteVault(vault.id)">Delete vault</button>
+
+            <h3>Below here is your keeps</h3>
+            <keep></keep>
           </div>
         </div>
 
-        <vault></vault>
+
+
       </div>
     </main>
 
@@ -33,6 +38,7 @@
 
 <script>
   import Vault from '@/Components/Vaults.vue'
+  import Keep from '@/Components/Keeps.vue'
   export default {
     name: "home",
     data() {
@@ -74,7 +80,8 @@
       }
     },
     components: {
-      Vault
+      Vault,
+      Keep
     }
   };
 </script>
