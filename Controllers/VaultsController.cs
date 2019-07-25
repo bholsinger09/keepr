@@ -39,11 +39,16 @@ namespace keepr.Controllers
     [Authorize]
     // GET api/vaults/id
     [HttpGet("{id}")]
-    public ActionResult<Vault> Get(int id)
+    public ActionResult<Vault> Get(Vault vault, int id)
     {
       try
       {
-        return Ok(_repo.GetById(id));
+        var Userid = HttpContext.User.FindFirstValue("Id");
+        vault.UserId = Userid;
+        vault.Id = id;
+
+
+        return Ok(_repo.GetById(vault));
       }
       catch (Exception e)
       {
@@ -100,7 +105,9 @@ namespace keepr.Controllers
     {
       try
       {
+        var Userid = HttpContext.User.FindFirstValue("Id");
         value.Id = id;
+        value.UserId = Userid;
         return Ok(_repo.Update(value));
       }
       catch (Exception e)
@@ -113,11 +120,14 @@ namespace keepr.Controllers
     [Authorize]
     // DELETE api/vaults/values/id
     [HttpDelete("{id}")]
-    public ActionResult<String> Delete(int id)
+    public ActionResult<Vault> Delete(Vault vault, int id)
     {
       try
       {
-        return Ok(_repo.Delete(id));
+        var Userid = HttpContext.User.FindFirstValue("Id");
+        vault.UserId = Userid;
+        vault.Id = id;
+        return Ok(_repo.Delete(vault));
       }
       catch (Exception e)
       {

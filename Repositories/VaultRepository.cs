@@ -30,12 +30,12 @@ namespace keepr.Repositories
 
     }
 
-    public object GetById(int id)
+    public object GetById(Vault vault)
     {
       try
       {
 
-        Vault vault = _db.QueryFirstOrDefault<Vault>("SELECT * FROM vaults WHERE id = @id and userId = @UserId;", new { id });
+        vault = _db.QueryFirstOrDefault<Vault>("SELECT * FROM vaults WHERE id = @id and userId = @UserId;", vault);
         if (vault is null) throw new Exception("No Job with that Id.");
         return vault;
       }
@@ -47,12 +47,14 @@ namespace keepr.Repositories
 
     }
 
-    public object Delete(int id)
+    public object Delete(Vault vault)
     {
       try
       {
-
-        int success = _db.Execute("DELETE FROM vaults WHERE id = @id and userId = @UserId;", new { id });
+        string query = @"DELETE FROM 
+        vaults WHERE
+         id = @Id and userId = @UserId;";
+        int success = _db.Execute(query, vault);
         if (success != 1) throw new Exception("Something went wrong with deleting.");
         return "vault deleted!";
       }

@@ -18,6 +18,7 @@
           <div class="vault">
             <p>name: {{vault.name}}</p>
             <p>description: {{vault.description}}</p>
+            <button @click="deleteVault(vault.id)">Delete vault</button>
           </div>
         </div>
 
@@ -47,6 +48,9 @@
         this.$router.push({ name: "login" })
       }
     },
+    mounted() {
+      this.$store.dispatch("getVaults");
+    },
     computed: {
       user() {
         return this.$store.state.user;
@@ -63,6 +67,10 @@
       addVault() {
         this.$store.dispatch("addVault", this.newVault);
         this.newVault = { name: "", description: "" }
+      },
+      deleteVault(vaultId) {
+
+        this.$store.dispatch("deleteVault", vaultId);
       }
     },
     components: {
