@@ -11,10 +11,10 @@
       <div class="divider">
       </div>
 
-      <div class="keeps-content" v-for="Keep in Keeps" :key="keep.id">
+      <div class="keeps-content" v-for="Keep in Keeps" :key="Keep._id">
         <div class="keep">
-          <p>{{keep.name}}</p>
-          <p>{{keep.description}}</p>
+          <p>{{Keep.name}}</p>
+          <p>{{Keep.description}}</p>
           <!-- <img src="{{keep.image}}" alt="keep" height="10vh" width="10vw"> -->
         </div>
       </div>
@@ -57,3 +57,10 @@
 
 
 </script>
+
+<style>
+  .keep {
+    border-color: blue;
+    border-style: solid
+  }
+</style>
