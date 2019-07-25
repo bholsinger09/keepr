@@ -15,12 +15,12 @@ namespace keepr.Repositories
       _db = db;
     }
 
-    public IEnumerable<Vault> GetAll(Vault payload)
+    public IEnumerable<Vault> GetAll(string userId)
     {
       try
       {
 
-        return _db.Query<Vault>("Select * FROM vaults Where userId = @UserId;", new { payload });
+        return _db.Query<Vault>("Select * FROM vaults Where userId = @UserId;", (new { userId }));
       }
       catch (Exception e)
       {
@@ -87,7 +87,7 @@ namespace keepr.Repositories
 
     }
 
-    public object Create(Vault vault, string userid)
+    public object Create(Vault vault)
     {
       try
       {
@@ -96,7 +96,6 @@ namespace keepr.Repositories
                 VALUES (@Name, @Description, @UserId); 
                 SELECT LAST_INSERT_ID();", vault);
         if (id < 1) throw new Exception("Unable to save vault to db.");
-        vault.Id = id;
         return vault;
 
       }

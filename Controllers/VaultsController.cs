@@ -23,12 +23,12 @@ namespace keepr.Controllers
     // GET api/vaults
     [Authorize]
     [HttpGet]
-    public ActionResult<IEnumerable<Vault>> Get(Vault payload)
+    public ActionResult<IEnumerable<Vault>> Get()
     {
       try
       {
-
-        return Ok(_repo.GetAll(payload));
+        string Userid = HttpContext.User.FindFirstValue("Id");
+        return Ok(_repo.GetAll(Userid));
       }
       catch (Exception e)
       {
@@ -76,7 +76,8 @@ namespace keepr.Controllers
       try
       {
         var Userid = HttpContext.User.FindFirstValue("Id");
-        var user = _repo.Create(value, Userid);
+        value.UserId = Userid;
+        var user = _repo.Create(value);
         if (user == null)
         {
           await HttpContext.SignOutAsync();

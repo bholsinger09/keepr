@@ -12,12 +12,12 @@
           <input type="text" placeholder="description" v-model="newVault.description">
           <button type="submit">Create Your Vault</button>
         </form>
-        <div class="devider">
+        <div class="divider">
         </div>
         <div class="vaults-content" v-for="vault in vaults" :key="vault._id">
           <div class="vault">
-            <p>{{vault.name}}</p>
-            <p>{{vault.description}}</p>
+            <p>name: {{vault.name}}</p>
+            <p>description: {{vault.description}}</p>
           </div>
         </div>
 
