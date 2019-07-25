@@ -27,6 +27,7 @@ namespace keepr.Controllers
     {
       try
       {
+
         return Ok(_repo.GetAll());
       }
       catch (Exception e)
@@ -35,7 +36,7 @@ namespace keepr.Controllers
         return BadRequest(e.Message);
       }
     }
-
+    [Authorize]
     // GET api/vaults/id
     [HttpGet("{id}")]
     public ActionResult<Vault> Get(int id)

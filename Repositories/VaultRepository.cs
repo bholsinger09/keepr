@@ -20,7 +20,7 @@ namespace keepr.Repositories
       try
       {
 
-        return _db.Query<Vault>("Select * FROM vaults;");
+        return _db.Query<Vault>("Select * FROM vaults Where userId = @UserId;");
       }
       catch (Exception e)
       {
@@ -35,7 +35,7 @@ namespace keepr.Repositories
       try
       {
 
-        Vault vault = _db.QueryFirstOrDefault<Vault>("SELECT * FROM vaults WHERE id = @id;", new { id });
+        Vault vault = _db.QueryFirstOrDefault<Vault>("SELECT * FROM vaults WHERE id = @id and userId = @UserId;", new { id });
         if (vault is null) throw new Exception("No Job with that Id.");
         return vault;
       }
@@ -52,7 +52,7 @@ namespace keepr.Repositories
       try
       {
 
-        int success = _db.Execute("DELETE FROM vaults WHERE id = @id;", new { id });
+        int success = _db.Execute("DELETE FROM vaults WHERE id = @id and userId = @UserId;", new { id });
         if (success != 1) throw new Exception("Something went wrong with deleting.");
         return "vault deleted!";
       }

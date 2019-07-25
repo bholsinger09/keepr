@@ -15,8 +15,10 @@
         <div class="devider">
         </div>
         <div class="vaults-content" v-for="vault in vaults" :key="vault._id">
-          <p>{vault.name}</p>
-          <p>{vault.description}</p>
+          <div class="vault">
+            <p>{{vault.name}}</p>
+            <p>{{vault.description}}</p>
+          </div>
         </div>
 
         <vault></vault>
@@ -65,4 +67,8 @@
 </script>
 
 <style>
+  .vault {
+    border-color: blue;
+    border-style: solid
+  }
 </style>

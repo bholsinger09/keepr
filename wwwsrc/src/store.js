@@ -27,6 +27,9 @@ export default new Vuex.Store({
     resetState(state) {
       //clear the entire state object of user data
       state.user = {}
+    },
+    setVaults(state, vault) {
+      state.vault = vault
     }
   },
   actions: {
@@ -68,7 +71,7 @@ export default new Vuex.Store({
       api.get('vaults')
         .then(res => {
           commit('setVaults', res.data)
-          console.log(res);
+          console.log(res.data);
         })
     },
 
