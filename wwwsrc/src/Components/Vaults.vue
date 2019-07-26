@@ -1,6 +1,17 @@
 <template>
   <div>
-    <h1> Here are the Keeps for you Vault</h1>
+    <div class="vaults-content" v-for="vault in vaults" :key="vault._id">
+      <div class="vault">
+        <h2>This is your Vault</h2>
+        <p>name: {{vault.name}}</p>
+        <p>description: {{vault.description}}</p>
+        <button @click="deleteVault(vault.id)">Delete vault</button>
+
+        <h3>Below here is your keeps</h3>
+
+      </div>
+    </div>
+
 
 
   </div>
@@ -13,18 +24,28 @@
     name: 'Vault',
     data() {
       return {
-        newVault: {
-          name: '',
-          description: ''
-          //userId: this.userId
-        }
+
+
       }
     },
 
     computed: {
-
+      user() {
+        return this.$store.state.user;
+      },
+      vaults() {
+        return this.$store.state.vault;
+      }
+    },
+    mounted() {
+      this.$store.dispatch("getVaults");
     },
     methods: {
+
+      deleteVault(vaultId) {
+
+        this.$store.dispatch("deleteVault", vaultId);
+      }
 
     },
     components: {
@@ -34,6 +55,8 @@
 
 
   }
+
+
 
 
 

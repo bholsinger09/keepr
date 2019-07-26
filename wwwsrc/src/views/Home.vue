@@ -6,7 +6,10 @@
       <router-link v-else :to="{name: 'login'}">Login</router-link>
     </header>
     <main>
+      <div class="divider">
+      </div>
       <div class="vaults">
+        <h4>Add your vault to store your keeps : </h4>
         <form @submit.prevent="addVault">
           <input type="text" placeholder="name" v-model="newVault.name" required>
           <input type="text" placeholder="description" v-model="newVault.description">
@@ -14,17 +17,10 @@
         </form>
         <div class="divider">
         </div>
-        <div class="vaults-content" v-for="vault in vaults" :key="vault._id">
-          <div class="vault">
-            <h2>This is your Vault</h2>
-            <p>name: {{vault.name}}</p>
-            <p>description: {{vault.description}}</p>
-            <button @click="deleteVault(vault.id)">Delete vault</button>
 
-            <h3>Below here is your keeps</h3>
-            <keep></keep>
-          </div>
-        </div>
+        <router-link>My Vault</router-link>
+        <keep></keep>
+
       </div>
     </main>
 
@@ -34,7 +30,7 @@
 </template>
 
 <script>
-  import Vault from '@/Components/Vaults.vue'
+
   import Keep from '@/Components/Keeps.vue'
   export default {
     name: "home",
@@ -51,9 +47,7 @@
         this.$router.push({ name: "login" })
       }
     },
-    mounted() {
-      this.$store.dispatch("getVaults");
-    },
+
     computed: {
       user() {
         return this.$store.state.user;
@@ -71,13 +65,10 @@
         this.$store.dispatch("addVault", this.newVault);
         this.newVault = { name: "", description: "" }
       },
-      deleteVault(vaultId) {
 
-        this.$store.dispatch("deleteVault", vaultId);
-      }
     },
     components: {
-      Vault,
+
       Keep
     }
   };
@@ -87,5 +78,9 @@
   .vault {
     border-color: blue;
     border-style: solid
+  }
+
+  .divider {
+    padding-top: 2em;
   }
 </style>
