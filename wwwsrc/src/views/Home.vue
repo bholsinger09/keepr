@@ -2,7 +2,10 @@
   <div class="home">
     <nav class="dashboard">
 
-      <router-link :to="{ path: '/myvault' }">My Vault</router-link>
+      <div class="vaults-content" v-for="vault in vaults" :key="vault._id">
+        <h4> Go to vault: </h4>
+        <router-link :to="{ name: 'vaultkeep', params: {vaultId:vault.id} }">Name of vault {{vault.name}}</router-link>
+      </div>
     </nav>
     <header class="welcome">
       <h1>Welcome Home {{user.username}}</h1>
@@ -23,7 +26,9 @@
         <div class="divider">
         </div>
 
-        <keep></keep>
+        <keep>
+
+        </keep>
 
       </div>
     </main>
@@ -50,6 +55,9 @@
       if (!this.$store.state.user.id) {
         this.$router.push({ name: "login" })
       }
+    },
+    mounted() {
+      this.$store.dispatch("getVaults");
     },
 
     computed: {

@@ -12,12 +12,15 @@
       <div class="divider">
       </div>
 
-      <div class="keeps-content" v-for="Keep in Keeps" :key="Keep._id">
+      <div class="keeps-content" v-for="Keep in Keeps" :key="Keep.id">
         <div class="keep">
-          <img v-bind:src="Keep.image">
+          <img v-bind:src="Keep.img">
           <p>keep name: {{Keep.name}}</p>
           <p>keep description: {{Keep.description}}</p>
-
+          <select v-model="selected" @change="moveKeepToVault(Keep)">
+            <option disabled value>Select vault</option>
+            <option v-for="vault in vaults" :key="vault.id" :value="vault.id">{{vault.name}}</option>
+          </select>
           <button @click="deleteKeep(Keep.id)">delete keep</button>
           <button @click="addViewed">view</button>
           <!-- <p> Number viewed : {{keep.viewed}}</p> -->
@@ -38,13 +41,15 @@
 <script>
   export default {
     name: 'Keep',
+
     data() {
       return {
         newKeep: {
           name: "",
           description: "",
           img: ""
-        }
+        },
+        selected: ""
       }
     },
     mounted() {
@@ -54,7 +59,11 @@
     computed: {
       Keeps() {
         return this.$store.state.keep;
+      },
+      vaults() {
+        return this.$store.state.vault;
       }
+
 
     },
     methods: {
@@ -71,11 +80,27 @@
 
       },
       addKeeped() {
+        // this.$store.dispatch("addKeepToVault", this.newKeep);
 
       },
       addShared() {
 
+      },
+      moveKeepToVault(Keep) {
+        // let targetKeep = this.newKeep;
+        // let keepId = targetKeep.id
+        //targetVault.oldListId = this.newKeep
+
+
+        let vaultId = this.selected;
+        let keepId = Keep.id;
+
+
+        this.selected = "";
+        this.$store.dispatch("addKeepToVault", { vaultId, keepId });
+
       }
+
 
     }
 

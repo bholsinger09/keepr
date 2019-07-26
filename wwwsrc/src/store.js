@@ -92,6 +92,14 @@ export default new Vuex.Store({
           dispatch('getVaults')
         })
     },
+    getVaultsById({ commit, dispatch }, vaultId) {
+
+      api.get('vaults/' + vaultId)
+        .then(res => {
+          commit('setVaults', res.data)
+        })
+
+    },
 
     addKeep({ commit, dispatch }, keepData) {
       api.post('keeps', keepData)
@@ -106,13 +114,30 @@ export default new Vuex.Store({
           console.log('getKeep', res.data)
         })
     },
+    addKeepToVault({ commit, dispatch }, payload) {
+      api.post('vaultkeeps', payload)
+        .then(res => {
+          commit('setKeeps', res.data)
+        })
+    },
 
     deleteKeep({ commit, dispatch }, keepId) {
       api.delete('keeps/' + keepId)
         .then(res => {
           dispatch('getKeeps')
         })
+    },
+    getKeepsByVaultId({ commit, dispatch }, vaultId) {
+      api.get('vaultkeeps', vaultId)
+        .then(res => {
+          commit('setkeeps', res.data)
+        }
+
+        )
+
+
     }
+
 
 
 

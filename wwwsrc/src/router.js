@@ -23,7 +23,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/myvault',
+      path: '/myvault/:vaultId',
       name: 'vaultkeep',
       props: true,
       component: VaultKeeps
