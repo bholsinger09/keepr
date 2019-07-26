@@ -1,10 +1,15 @@
 <template>
   <div class="home">
+    <nav class="dashboard">
+
+      <router-link :to="{ path: '/myvault' }">My Vault</router-link>
+    </nav>
     <header class="welcome">
       <h1>Welcome Home {{user.username}}</h1>
       <button v-if="user.id" @click="logout">logout</button>
       <router-link v-else :to="{name: 'login'}">Login</router-link>
     </header>
+
     <main>
       <div class="divider">
       </div>
@@ -17,8 +22,7 @@
         </form>
         <div class="divider">
         </div>
-        <p>Click myvault to view vaults that store your keeps</p>
-        <router-link :to="{ path: '/myvault' }">My Vault</router-link>
+
         <keep></keep>
 
       </div>

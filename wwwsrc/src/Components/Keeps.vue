@@ -6,6 +6,7 @@
       <form @submit.prevent="addKeep">
         <input type="text" placeholder="name" v-model="newKeep.name" required>
         <input type="text" placeholder="description" v-model="newKeep.description">
+        <input type="text" placeholder="add image url" v-model="newKeep.img">
         <button type="submit">Create Your keep</button>
       </form>
       <div class="divider">
@@ -13,9 +14,10 @@
 
       <div class="keeps-content" v-for="Keep in Keeps" :key="Keep._id">
         <div class="keep">
+          <img v-bind:src="Keep.image">
           <p>keep name: {{Keep.name}}</p>
           <p>keep description: {{Keep.description}}</p>
-          <!-- <img src="{{keep.image}}" alt="keep" height="10vh" width="10vw"> -->
+
           <button @click="deleteKeep(Keep.id)">delete keep</button>
           <button @click="addViewed">view</button>
           <!-- <p> Number viewed : {{keep.viewed}}</p> -->
@@ -40,7 +42,8 @@
       return {
         newKeep: {
           name: "",
-          description: ""
+          description: "",
+          img: ""
         }
       }
     },
@@ -56,8 +59,9 @@
     },
     methods: {
       addKeep() {
+
         this.$store.dispatch("addKeep", this.newKeep);
-        this.newKeep = { name: "", description: "" }
+        this.newKeep = { name: "", description: "", img: "" }
       },
       deleteKeep(keepId) {
 
