@@ -66,7 +66,8 @@
       },
       vaults() {
         return this.$store.state.vaults;
-      }
+      },
+
     },
 
     methods: {

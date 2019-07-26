@@ -61,8 +61,9 @@
         return this.$store.state.keep;
       },
       vaults() {
-        return this.$store.state.vault;
+        return this.$store.state.vaults;
       }
+
 
 
     },

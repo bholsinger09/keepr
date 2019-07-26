@@ -42,7 +42,7 @@
 
 
       this.$store.dispatch("getVaultsById", this.vaultId);
-      //this.$store.dispatch("getKeepsByVaultId", this.vaultId);
+      this.$store.dispatch("getKeepsByVaultId", this.vaultId);
     },
     computed: {
       user() {
