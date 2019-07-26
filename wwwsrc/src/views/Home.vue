@@ -57,6 +57,7 @@
       }
     },
     mounted() {
+      //TODO: GET ALL (PUBLIC) KEEPS 
       this.$store.dispatch("getVaults");
     },
 

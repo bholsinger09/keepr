@@ -112,6 +112,7 @@ export default new Vuex.Store({
         })
     },
     getKeeps({ commit, dispatch }) {
+      //TODO: GET ALL KEEPS AS WELL
       api.get('keeps' + ('/user'))
         .then(res => {
           commit('setKeeps', res.data)

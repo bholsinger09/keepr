@@ -20,6 +20,9 @@ namespace keepr.Repositories
     {
       try
       {
+        //FIXME: WHere isPrivate 
+        // 1 is true
+        // 0 false
         return _db.Query<Keep>("Select * FROM keeps;");
       }
       catch (Exception e)
