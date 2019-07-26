@@ -30,14 +30,14 @@ namespace keepr.Repositories
 
     }
 
-    public object GetById(Vault vault)
+    public object GetById(int id, string userId)
     {
       try
       {
 
-        vault = _db.QueryFirstOrDefault<Vault>("SELECT * FROM vaults WHERE id = @id and userId = @UserId;", vault);
-        if (vault is null) throw new Exception("No Job with that Id.");
-        return vault;
+
+
+        return _db.QueryFirstOrDefault<Vault>("SELECT * FROM vaults WHERE id = @id and userId = @UserId;", new { id, userId });
       }
       catch (Exception e)
       {

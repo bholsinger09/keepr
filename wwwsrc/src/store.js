@@ -17,6 +17,7 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     user: {},
+    vaults: {},
     vault: {},
     keep: {},
   },
@@ -28,7 +29,10 @@ export default new Vuex.Store({
       //clear the entire state object of user data
       state.user = {}
     },
-    setVaults(state, vault) {
+    setVaults(state, vaults) {
+      state.vaults = vaults
+    },
+    setVault(state, vault) {
       state.vault = vault
     },
     setKeeps(state, keep) {
@@ -96,7 +100,7 @@ export default new Vuex.Store({
 
       api.get('vaults/' + vaultId)
         .then(res => {
-          commit('setVaults', res.data)
+          commit('setVault', res.data)
         })
 
     },

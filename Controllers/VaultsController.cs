@@ -39,16 +39,15 @@ namespace keepr.Controllers
     [Authorize]
     // GET api/vaults/id
     [HttpGet("{id}")]
-    public ActionResult<Vault> Get(Vault vault, int id)
+    public ActionResult<Vault> Get(int id)
     {
       try
       {
         var Userid = HttpContext.User.FindFirstValue("Id");
-        vault.UserId = Userid;
-        vault.Id = id;
 
 
-        return Ok(_repo.GetById(vault));
+
+        return Ok(_repo.GetById(id, Userid));
       }
       catch (Exception e)
       {

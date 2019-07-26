@@ -1,7 +1,13 @@
 <template>
   <div>
     <router-link :to="{ path: '/' }">Home Page</router-link>
-    <vaults></vaults>
+
+
+    <h4>Name of vault : {{vault.name}}</h4>
+    <h4>Description : {{vault.description}}</h4>
+
+
+
 
 
 
@@ -17,7 +23,7 @@
 <script>
 
   import Keep from '@/Components/Keeps.vue'
-  import Vaults from '@/Components/Vaults.vue'
+
   export default {
     name: "vaultkeep",
     props: ["vaultId"],
@@ -33,21 +39,21 @@
       }
     },
     mounted() {
-      //let vaultId = this.$router.
-      // this.$store.dispatch("getVaultsById", vaultId);
-      // this.$store.dispatch("getKeepsByVaultId", vaultId);
+
+
+      this.$store.dispatch("getVaultsById", this.vaultId);
+      //this.$store.dispatch("getKeepsByVaultId", this.vaultId);
     },
     computed: {
       user() {
         return this.$store.state.user;
       },
-      vaults() {
-        return this.$store.state.vault.find(vault => vault.id == this.vaultId) || {
-          title: "Loading...",
-        }
+      vault() {
+        return this.$store.state.vault;
       }
+    }
 
-    },
+    ,
 
     methods: {
 
@@ -57,7 +63,7 @@
     components: {
 
       Keep,
-      Vaults
+
 
     }
   };
