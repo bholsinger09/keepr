@@ -17,6 +17,12 @@
           <p>keep description: {{Keep.description}}</p>
           <!-- <img src="{{keep.image}}" alt="keep" height="10vh" width="10vw"> -->
           <button @click="deleteKeep(Keep.id)">delete keep</button>
+          <!-- <button @click="addViewed">view</button>
+          <p> Number viewed : {{keep.viewed}}</p>
+          <button @click="addKeeped">keep</button>
+          <p> Number keeped : {{keep.keeped}}</p>
+          <button @click="addShared">share</button>
+          <p> Number Shared: {{keep.shared}}</p> -->
         </div>
       </div>
 
