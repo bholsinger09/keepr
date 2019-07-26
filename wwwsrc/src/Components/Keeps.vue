@@ -13,8 +13,8 @@
 
       <div class="keeps-content" v-for="Keep in Keeps" :key="Keep._id">
         <div class="keep">
-          <p>{{Keep.name}}</p>
-          <p>{{Keep.description}}</p>
+          <p>keep name: {{Keep.name}}</p>
+          <p>keep description: {{Keep.description}}</p>
           <!-- <img src="{{keep.image}}" alt="keep" height="10vh" width="10vw"> -->
           <button @click="deleteKeep(Keep.id)">delete keep</button>
         </div>
