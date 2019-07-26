@@ -4,6 +4,8 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 // @ts-ignore
 import Login from './views/Login.vue'
+//@ts-ignore
+import VaultKeeps from './views/VaultKeeps.vue'
 
 Vue.use(Router)
 
@@ -12,6 +14,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
+      props: true,
       component: Home
     },
     {
@@ -22,6 +25,7 @@ export default new Router({
     {
       path: '/myvault',
       name: 'vaultkeep',
+      props: true,
       component: VaultKeeps
     }
   ]

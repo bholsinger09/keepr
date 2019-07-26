@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4> test keep component </h4>
+    <h4> View keeps :</h4>
 
     <div class="keeps">
       <form @submit.prevent="addKeep">

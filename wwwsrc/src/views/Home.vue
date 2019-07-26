@@ -17,8 +17,8 @@
         </form>
         <div class="divider">
         </div>
-
-        <router-link>My Vault</router-link>
+        <p>Click myvault to view vaults that store your keeps</p>
+        <router-link :to="{ path: '/myvault' }">My Vault</router-link>
         <keep></keep>
 
       </div>

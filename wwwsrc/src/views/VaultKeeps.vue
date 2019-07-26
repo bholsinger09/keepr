@@ -1,6 +1,7 @@
 <template>
   <div>
-
+    <router-link :to="{ path: '/' }">Home Page</router-link>
+    <vaults></vaults>
 
 
 
@@ -16,6 +17,7 @@
 <script>
 
   import Keep from '@/Components/Keeps.vue'
+  import Vaults from '@/Components/Vaults.vue'
   export default {
     name: "vaultkeep",
     data() {
@@ -45,7 +47,9 @@
     },
     components: {
 
-      Keep
+      Keep,
+      Vaults
+
     }
   };
 </script>
